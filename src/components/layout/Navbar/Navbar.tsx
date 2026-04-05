@@ -18,7 +18,7 @@ export function Navbar({
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-primary-dark flex items-center px-6 shadow-md">
       {/* Logo */}
-      <Logo variant="white" height={30} />
+      <Logo variant="white" height={40} />
 
       {/* Nav links */}
       {navLinks.length > 0 && (

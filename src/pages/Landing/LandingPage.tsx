@@ -5,9 +5,9 @@ import { Logo } from '../../components/ui/Logo'
 
 function LandingNavbar() {
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl bg-white rounded-full shadow-lg px-5 py-2.5 flex items-center">
+    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl bg-white rounded-full shadow-lg px-5 py-1.5 flex items-center">
       <a href="#" className="shrink-0">
-        <Logo variant="color" height={32} />
+        <Logo variant="color" height={48} />
       </a>
 
       <div className="hidden md:flex items-center gap-6 ml-8">
@@ -398,7 +398,7 @@ function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-3">
-              <Logo variant="white" height={28} />
+              <Logo variant="white" height={40} />
             </div>
             <p className="font-body text-white/40 text-xs leading-relaxed mb-4">
               Planifica viajes grupales sin complicaciones.
