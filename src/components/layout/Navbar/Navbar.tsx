@@ -17,7 +17,7 @@ export function Navbar({
   logoText = 'ithera',
 }: NavbarProps) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-primary flex items-center px-6 shadow-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-primary-dark flex items-center px-6 shadow-md">
       {/* Logo */}
       <span className="font-heading font-bold text-white text-xl tracking-tight select-none">
         {logoText}

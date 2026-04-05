@@ -59,7 +59,7 @@ export function Input({
             'focus:ring-2 focus:ring-offset-0',
             hasError
               ? 'border-error focus:border-error focus:ring-error/30'
-              : 'border-gray-300 focus:border-accent focus:ring-accent/30',
+              : 'border-gray-300 focus:border-blue focus:ring-blue/30',
             disabled ? 'bg-gray-50 text-gray-400 cursor-not-allowed' : '',
             leftIcon ? 'pl-10' : '',
             rightIcon ? 'pr-10' : '',

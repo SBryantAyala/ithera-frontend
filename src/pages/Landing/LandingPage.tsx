@@ -6,22 +6,22 @@ function LandingNavbar() {
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl bg-white rounded-full shadow-lg px-5 py-2.5 flex items-center">
       <a href="#" className="flex items-center gap-2 shrink-0">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-accent" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-blue" aria-hidden="true">
           <path d="M21 3L3 10.5l6.75 2.25L12 21l2.25-8.25L21 3z" fill="currentColor" opacity="0.3"/>
           <path d="M21 3L12.75 12.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           <path d="M9.75 12.75L3 10.5 21 3" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
         </svg>
-        <span className="font-heading font-bold text-primary text-sm tracking-wide">ITHERA</span>
+        <span className="font-heading font-bold text-primary-dark text-sm tracking-wide">ITHERA</span>
       </a>
 
       <div className="hidden md:flex items-center gap-6 ml-8">
-        <a href="#features" className="font-body text-sm text-gray-500 hover:text-primary transition-colors">Explorar</a>
-        <a href="#how" className="font-body text-sm text-gray-500 hover:text-primary transition-colors">Cómo funciona</a>
+        <a href="#features" className="font-body text-sm text-gray-500 hover:text-primary-dark transition-colors">Explorar</a>
+        <a href="#how" className="font-body text-sm text-gray-500 hover:text-primary-dark transition-colors">Cómo funciona</a>
       </div>
 
       <div className="ml-auto flex items-center gap-4">
-        <a href="#" className="hidden md:block font-body text-sm text-gray-500 hover:text-primary transition-colors">Mis viajes</a>
-        <a href="#" className="font-body text-sm text-gray-600 hover:text-primary transition-colors">Iniciar sesión</a>
+        <a href="#" className="hidden md:block font-body text-sm text-gray-500 hover:text-primary-dark transition-colors">Mis viajes</a>
+        <a href="#" className="font-body text-sm text-gray-600 hover:text-primary-dark transition-colors">Iniciar sesión</a>
         <button className="font-body text-sm font-medium bg-green text-white rounded-full px-4 py-1.5 hover:opacity-90 transition-opacity">
           Crear cuenta
         </button>
@@ -39,10 +39,10 @@ function HeroSection() {
   const [people, setPeople] = useState('')
 
   return (
-    <section className="relative bg-primary min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-20">
+    <section className="relative bg-primary-dark min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-20">
       {/* Background gradient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-secondary/30 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/30 rounded-full blur-3xl" />
       </div>
 
       {/* Badge */}
@@ -54,7 +54,7 @@ function HeroSection() {
       {/* Headline */}
       <h1 className="relative font-heading font-bold text-white text-5xl md:text-6xl leading-tight max-w-2xl mb-4">
         Planifica tu viaje grupal{' '}
-        <span className="text-accent">sin el caos.</span>
+        <span className="text-blue">sin el caos.</span>
       </h1>
 
       <p className="relative font-body text-white/60 text-base max-w-md mb-8">
@@ -84,7 +84,7 @@ function HeroSection() {
             placeholder="Mi aventura 2025"
             value={tripName}
             onChange={e => setTripName(e.target.value)}
-            className="font-body text-sm text-primary placeholder-gray-300 outline-none"
+            className="font-body text-sm text-primary-dark placeholder-gray-300 outline-none"
           />
         </div>
         <div className="flex-1 flex flex-col px-3 py-2 border-b sm:border-b-0 sm:border-r border-gray-100">
@@ -94,7 +94,7 @@ function HeroSection() {
             placeholder="¿A dónde vamos?"
             value={dates}
             onChange={e => setDates(e.target.value)}
-            className="font-body text-sm text-primary placeholder-gray-300 outline-none"
+            className="font-body text-sm text-primary-dark placeholder-gray-300 outline-none"
           />
         </div>
         <div className="w-24 flex flex-col px-3 py-2 border-b sm:border-b-0 sm:border-r border-gray-100">
@@ -104,7 +104,7 @@ function HeroSection() {
             placeholder="Agregar"
             value={destination}
             onChange={e => setDestination(e.target.value)}
-            className="font-body text-sm text-primary placeholder-gray-300 outline-none"
+            className="font-body text-sm text-primary-dark placeholder-gray-300 outline-none"
           />
         </div>
         <div className="w-20 flex flex-col px-3 py-2">
@@ -114,10 +114,10 @@ function HeroSection() {
             placeholder="2"
             value={people}
             onChange={e => setPeople(e.target.value)}
-            className="font-body text-sm text-primary placeholder-gray-300 outline-none w-full"
+            className="font-body text-sm text-primary-dark placeholder-gray-300 outline-none w-full"
           />
         </div>
-        <button className="font-body font-medium text-sm bg-accent text-white rounded-xl px-5 py-3 hover:bg-accent/90 transition-colors whitespace-nowrap">
+        <button className="font-body font-medium text-sm bg-blue text-white rounded-xl px-5 py-3 hover:bg-blue/90 transition-colors whitespace-nowrap">
           Crear Itinerario
         </button>
       </div>
@@ -128,7 +128,7 @@ function HeroSection() {
           {['#7A4FD6', '#35C56A', '#1E6FD9'].map((color, i) => (
             <div
               key={i}
-              className="w-7 h-7 rounded-full border-2 border-primary"
+              className="w-7 h-7 rounded-full border-2 border-primary-dark"
               style={{ backgroundColor: color }}
             />
           ))}
@@ -144,7 +144,7 @@ function HeroSection() {
 const features = [
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-blue">
         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         <polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
@@ -154,7 +154,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-blue">
         <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
         <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -166,7 +166,7 @@ const features = [
   },
   {
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-accent">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-blue">
         <line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
@@ -183,17 +183,17 @@ function FeaturesSection() {
         <p className="font-body text-xs text-gray-400 uppercase tracking-widest text-center mb-3">
           ¿Qué puedes hacer?
         </p>
-        <h2 className="font-heading font-bold text-primary text-3xl md:text-4xl text-center mb-14">
+        <h2 className="font-heading font-bold text-primary-dark text-3xl md:text-4xl text-center mb-14">
           Todo lo que necesitas para planear en grupo
         </h2>
 
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((f) => (
             <div key={f.title} className="border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center mb-4">
+              <div className="w-10 h-10 bg-blue/10 rounded-xl flex items-center justify-center mb-4">
                 {f.icon}
               </div>
-              <h3 className="font-heading font-semibold text-primary text-base mb-2">{f.title}</h3>
+              <h3 className="font-heading font-semibold text-primary-dark text-base mb-2">{f.title}</h3>
               <p className="font-body text-gray-500 text-sm leading-relaxed">{f.description}</p>
             </div>
           ))}
@@ -214,7 +214,7 @@ const demoPoints = [
 
 function DemoSection() {
   return (
-    <section className="bg-primary py-24 px-4">
+    <section className="bg-primary-dark py-24 px-4">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
         {/* Left */}
         <div className="flex-1">
@@ -233,7 +233,7 @@ function DemoSection() {
 
         {/* Right — app mockup placeholder */}
         <div className="flex-1 w-full max-w-sm">
-          <div className="bg-secondary/40 rounded-2xl border border-white/10 aspect-[4/3] flex items-center justify-center">
+          <div className="bg-primary/40 rounded-2xl border border-white/10 aspect-[4/3] flex items-center justify-center">
             <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" className="text-white/50">
                 <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2"/>
@@ -263,14 +263,14 @@ function DestinationsSection() {
     <section className="bg-white py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-10">
-          <h2 className="font-heading font-bold text-primary text-2xl md:text-3xl">
+          <h2 className="font-heading font-bold text-primary-dark text-2xl md:text-3xl">
             Destinos populares para grupos
           </h2>
           <div className="flex gap-2">
-            <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:border-primary transition-colors">
+            <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:border-primary-dark transition-colors">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
             </button>
-            <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:border-primary transition-colors">
+            <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:border-primary-dark transition-colors">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><polyline points="9 18 15 12 9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
             </button>
           </div>
@@ -304,7 +304,7 @@ const steps = [
   {
     number: '1',
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-secondary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2"/>
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -316,7 +316,7 @@ const steps = [
   {
     number: '2',
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-secondary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary">
         <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
@@ -327,7 +327,7 @@ const steps = [
   {
     number: '3',
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-secondary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary">
         <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
         <path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
@@ -341,20 +341,20 @@ function HowItWorksSection() {
   return (
     <section id="how" className="bg-background py-24 px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-heading font-bold text-primary text-3xl md:text-4xl mb-16">
+        <h2 className="font-heading font-bold text-primary-dark text-3xl md:text-4xl mb-16">
           ¿Cómo funciona?
         </h2>
 
         <div className="grid md:grid-cols-3 gap-10">
           {steps.map((step) => (
             <div key={step.number} className="flex flex-col items-center">
-              <div className="relative w-16 h-16 rounded-full border-2 border-secondary/30 flex items-center justify-center mb-4">
-                <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-secondary text-white font-heading font-bold text-xs flex items-center justify-center">
+              <div className="relative w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center mb-4">
+                <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary text-white font-heading font-bold text-xs flex items-center justify-center">
                   {step.number}
                 </span>
                 {step.icon}
               </div>
-              <h3 className="font-heading font-semibold text-primary text-base mb-2">{step.title}</h3>
+              <h3 className="font-heading font-semibold text-primary-dark text-base mb-2">{step.title}</h3>
               <p className="font-body text-gray-500 text-sm">{step.description}</p>
             </div>
           ))}
@@ -368,7 +368,7 @@ function HowItWorksSection() {
 
 function CTASection() {
   return (
-    <section className="bg-primary py-24 px-4 text-center">
+    <section className="bg-primary-dark py-24 px-4 text-center">
       <div className="max-w-2xl mx-auto">
         <h2 className="font-heading font-bold text-white text-4xl md:text-5xl mb-4">
           ¿Listo para tu próxima aventura?
@@ -396,13 +396,13 @@ const footerLinks = {
 
 function Footer() {
   return (
-    <footer className="bg-primary border-t border-white/10 py-14 px-4">
+    <footer className="bg-primary-dark border-t border-white/10 py-14 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-accent">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-blue">
                 <path d="M21 3L3 10.5l6.75 2.25L12 21l2.25-8.25L21 3z" fill="currentColor" opacity="0.3"/>
                 <path d="M21 3L12.75 12.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 <path d="M9.75 12.75L3 10.5 21 3" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>

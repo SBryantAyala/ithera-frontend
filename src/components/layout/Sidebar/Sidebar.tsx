@@ -36,7 +36,7 @@ export function Sidebar({
   return (
     <aside
       className={[
-        'fixed left-0 top-16 z-40 flex flex-col bg-primary',
+        'fixed left-0 top-16 z-40 flex flex-col bg-primary-dark',
         'h-[calc(100vh-4rem)] transition-all duration-300 shadow-lg',
         isCollapsed ? 'w-16' : 'w-64',
         className,
@@ -73,7 +73,7 @@ export function Sidebar({
                   'flex items-center px-3 py-2.5 rounded-lg transition-colors duration-150',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white',
                   isActive
-                    ? 'bg-accent text-white'
+                    ? 'bg-blue text-white'
                     : 'text-white/70 hover:bg-white/10 hover:text-white',
                 ].join(' ')}
                 aria-current={isActive ? 'page' : undefined}
@@ -93,7 +93,7 @@ export function Sidebar({
                   {item.label}
                 </span>
                 {!isCollapsed && item.badge !== undefined && (
-                  <span className="ml-auto bg-accent/80 text-white text-xs font-body font-medium rounded-full px-1.5 py-0.5">
+                  <span className="ml-auto bg-blue/80 text-white text-xs font-body font-medium rounded-full px-1.5 py-0.5">
                     {item.badge}
                   </span>
                 )}
