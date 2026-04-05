@@ -1,17 +1,13 @@
 import { useState } from 'react'
+import { Logo } from '../../components/ui/Logo'
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
 function LandingNavbar() {
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl bg-white rounded-full shadow-lg px-5 py-2.5 flex items-center">
-      <a href="#" className="flex items-center gap-2 shrink-0">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" className="text-blue" aria-hidden="true">
-          <path d="M21 3L3 10.5l6.75 2.25L12 21l2.25-8.25L21 3z" fill="currentColor" opacity="0.3"/>
-          <path d="M21 3L12.75 12.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          <path d="M9.75 12.75L3 10.5 21 3" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-        </svg>
-        <span className="font-heading font-bold text-primary-dark text-sm tracking-wide">ITHERA</span>
+      <a href="#" className="shrink-0">
+        <Logo variant="color" height={32} />
       </a>
 
       <div className="hidden md:flex items-center gap-6 ml-8">
@@ -401,13 +397,8 @@ function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-blue">
-                <path d="M21 3L3 10.5l6.75 2.25L12 21l2.25-8.25L21 3z" fill="currentColor" opacity="0.3"/>
-                <path d="M21 3L12.75 12.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                <path d="M9.75 12.75L3 10.5 21 3" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
-              </svg>
-              <span className="font-heading font-bold text-white text-sm">ITHERA</span>
+            <div className="mb-3">
+              <Logo variant="white" height={28} />
             </div>
             <p className="font-body text-white/40 text-xs leading-relaxed mb-4">
               Planifica viajes grupales sin complicaciones.
