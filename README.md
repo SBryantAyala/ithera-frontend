@@ -1,73 +1,115 @@
-# React + TypeScript + Vite
+# Ithera Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web de planificación de viajes colaborativos en tiempo real.
 
-Currently, two official plugins are available:
+Desarrollada por el Equipo 3 — Análisis y Diseño de Sistemas · ESCOM IPN
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Stack tecnológico
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React + TypeScript** — Interfaz de usuario por componentes
+- **Tailwind CSS** — Estilos utilitarios y diseño responsive
+- **Vite** — Bundler y entorno de desarrollo
+- **React Router DOM** — Navegación entre vistas
+- **Axios + React Query** — Peticiones HTTP y manejo de estado
+- **Socket.io Client** — Actualizaciones en tiempo real
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Instalación
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/SBryantAyala/ithera-frontend.git
+cd ithera-frontend
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# 2. Instalar dependencias
+npm install
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# 3. Correr en desarrollo
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+La app estará disponible en `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Flujo de trabajo del equipo
+
 ```
+main          ← código estable y revisado
+  └── dev     ← rama principal de integración
+        ├── feat/landing        
+        ├── feat/itinerary      
+        ├── feat/login          
+        └── feat/...            
+```
+
+### Pasos para contribuir
+
+```bash
+# 1. Siempre partir de dev actualizado
+git checkout dev
+git pull
+
+# 2. Crear tu rama con el nombre de tu pantalla
+git checkout -b feat/nombre-pantalla
+
+# 3. Trabajar normalmente y hacer commits
+git add .
+git commit -m "feat: descripción de lo que hiciste"
+
+# 4. Subir tu rama
+git push origin feat/nombre-pantalla
+
+# 5. Abrir un Pull Request a dev en GitHub
+```
+
+---
+
+## Estructura del proyecto
+
+```
+src/
+├── components/      ← Componentes reutilizables (Navbar, Button, Card...)
+├── pages/           ← Una carpeta por pantalla
+│   ├── Landing/
+│   ├── Login/
+│   ├── Register/
+│   ├── Itinerary/
+│   └── ...
+├── hooks/           ← Custom hooks
+├── services/        ← Llamadas a la API
+├── types/           ← Interfaces TypeScript
+├── assets/          ← Imágenes, íconos, fuentes
+└── styles/          ← Estilos globales
+```
+
+---
+
+## Sistema de diseño
+
+| Token | Valor |
+|---|---|
+| Primary Dark | `#1E0A4E` |
+| Primary | `#4B2FA3` |
+| Blue | `#1E6FD9` |
+| Purple | `#7A4FD6` |
+| Green | `#35C56A` |
+| Background | `#F4F6F8` |
+| Error | `#EF4444` |
+
+Tipografía: **Plus Jakarta Sans** (headings) · **DM Sans** (body)
+
+Guía de paleta completa: [sbryantayala.github.io/GUIA-DE-PALETA-DE-COLORES](https://sbryantayala.github.io/GUIA-DE-PALETA-DE-COLORES)
+
+---
+
+## Equipo Frontend
+
+| Nombre | Rol | Pantallas |
+|---|---|---|
+| Ayala Baños Bryan | Frontend Lead | Landing (P0), Itinerario (P8) |
+| López Toledo Kevin | Frontend Dev | Login, Registro, Búsqueda |
+| Juarez Gomez Carlos | Frontend Dev | Perfil, Módulos colaborativos |
