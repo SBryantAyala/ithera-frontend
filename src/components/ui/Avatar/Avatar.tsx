@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Size } from '../../types'
+import type { Size } from '../../../types'
 
 export interface AvatarProps {
   src?: string

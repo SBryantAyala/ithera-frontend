@@ -1,5 +1,5 @@
-import type { User, NavItem } from '../../types'
-import { Avatar } from '../Avatar'
+import type { User, NavItem } from '../../../types'
+import { Avatar } from '../../ui/Avatar'
 
 export interface NavbarProps {
   user?: User

@@ -1,5 +1,5 @@
 import React, { useId } from 'react'
-import type { Size } from '../../types'
+import type { Size } from '../../../types'
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string

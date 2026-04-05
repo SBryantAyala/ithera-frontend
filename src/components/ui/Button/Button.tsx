@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ButtonVariant, Size } from '../../types'
+import type { ButtonVariant, Size } from '../../../types'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant

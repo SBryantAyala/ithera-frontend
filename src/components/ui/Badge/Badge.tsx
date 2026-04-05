@@ -1,5 +1,5 @@
 import React from 'react'
-import type { BadgeVariant } from '../../types'
+import type { BadgeVariant } from '../../../types'
 
 export interface BadgeProps {
   variant?: BadgeVariant
