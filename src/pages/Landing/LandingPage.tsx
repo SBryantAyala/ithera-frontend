@@ -89,9 +89,16 @@ function HeroSection() {
 
   return (
     <section className="relative bg-primary-dark min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-20">
-      {/* Background gradient glow */}
+      {/* Background gradient glow + dot grid */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/30 rounded-full blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+          }}
+        />
       </div>
 
       {/* Badge */}
@@ -106,7 +113,7 @@ function HeroSection() {
       {/* Headline */}
       <h1 className="relative font-heading font-bold text-white text-5xl md:text-6xl leading-tight max-w-2xl mb-4">
         Planifica tu viaje grupal{' '}
-        <span className="text-blue">sin el caos.</span>
+        <span className="bg-gradient-to-r from-[#1E6FD9] to-[#7A4FD6] bg-clip-text text-transparent">sin el caos.</span>
       </h1>
 
       <p className="relative font-body text-white/60 text-base max-w-md mb-8">
@@ -193,6 +200,30 @@ function HeroSection() {
   )
 }
 
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+const stats = [
+  { value: '1,200+', label: 'grupos creados' },
+  { value: '50+',    label: 'destinos disponibles' },
+  { value: '98%',    label: 'satisfacción' },
+  { value: '100%',   label: 'completamente gratis' },
+]
+
+function StatsSection() {
+  return (
+    <section className="bg-white border-b border-[#E2E8F0] py-10 px-4">
+      <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {stats.map((s) => (
+          <div key={s.label}>
+            <p className="font-heading font-bold text-[#1E0A4E] text-3xl mb-1">{s.value}</p>
+            <p className="font-body text-[#7A8799] text-sm">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 // ── Features ──────────────────────────────────────────────────────────────────
 
 const features = [
@@ -244,7 +275,7 @@ function FeaturesSection() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((f) => (
-            <div key={f.title} className="border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div key={f.title} className="border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#1E6FD9]/30 transition-all duration-300">
               <div className="w-10 h-10 bg-blue/10 rounded-xl flex items-center justify-center mb-4">
                 {f.icon}
               </div>
@@ -346,6 +377,80 @@ function DestinationsSection() {
                 <p className="font-body text-xs text-white/60 group-hover:text-white group-hover:font-medium transition-all duration-300">
                   Ver paquetes →
                 </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Testimonials ──────────────────────────────────────────────────────────────
+
+const testimonials = [
+  {
+    quote: 'Organizamos el viaje de generación de 12 personas en 3 días. Sin Ithera nos habría tomado semanas de coordinación.',
+    name: 'Ana Martínez',
+    role: 'Estudiante · UNAM',
+    color: '#1E6FD9',
+  },
+  {
+    quote: 'El presupuesto compartido fue un game changer. Todos sabíamos exactamente cuánto llevábamos gastado en tiempo real.',
+    name: 'Carlos Herrera',
+    role: 'Ingeniero · Monterrey',
+    color: '#7A4FD6',
+  },
+  {
+    quote: 'Invité a mis amigos con un link, votamos destinos y en 20 minutos teníamos el itinerario completo listo.',
+    name: 'Sofía Ramírez',
+    role: 'Diseñadora · CDMX',
+    color: '#35C56A',
+  },
+]
+
+function TestimonialsSection() {
+  const ref = useFadeIn()
+  return (
+    <section ref={ref} className="bg-[#F4F6F8] py-24 px-4">
+      <div className="max-w-5xl mx-auto">
+        <p className="font-body text-xs text-[#7A8799] uppercase tracking-widest text-center mb-3">
+          Lo que dicen los viajeros
+        </p>
+        <h2 className="font-heading font-bold text-[#1E0A4E] text-3xl md:text-4xl text-center mb-14">
+          Miles de grupos ya planean con Ithera
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((t) => (
+            <div
+              key={t.name}
+              className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm flex flex-col gap-4 hover:shadow-md transition-shadow duration-300"
+            >
+              {/* Stars */}
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+
+              <p className="font-body text-[#3D4A5C] text-sm leading-relaxed flex-1">
+                "{t.quote}"
+              </p>
+
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-heading font-bold text-sm shrink-0"
+                  style={{ backgroundColor: t.color }}
+                >
+                  {t.name[0]}
+                </div>
+                <div>
+                  <p className="font-heading font-semibold text-[#1E0A4E] text-sm">{t.name}</p>
+                  <p className="font-body text-[#7A8799] text-xs">{t.role}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -523,9 +628,11 @@ export function LandingPage() {
     <div className="font-body">
       <LandingNavbar />
       <HeroSection />
+      <StatsSection />
       <FeaturesSection />
       <DemoSection />
       <DestinationsSection />
+      <TestimonialsSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />
