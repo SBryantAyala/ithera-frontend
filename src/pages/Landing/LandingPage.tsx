@@ -1,26 +1,78 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Logo } from '../../components/ui/Logo'
+
+// ── Hooks ─────────────────────────────────────────────────────────────────────
+
+function useCountUp(target: number, duration = 1500) {
+  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const start = performance.now()
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1)
+      setCount(Math.floor(progress * target))
+      if (progress < 1) requestAnimationFrame(step)
+    }
+    requestAnimationFrame(step)
+  }, [target, duration])
+  return count
+}
+
+function useFadeIn() {
+  const ref = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    el.style.opacity = '0'
+    el.style.transform = 'translateY(32px)'
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease'
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = '1'
+          el.style.transform = 'translateY(0)'
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+  return ref
+}
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
 function LandingNavbar() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl bg-white rounded-full shadow-lg px-5 py-1.5 flex items-center">
+    <nav className={`fixed top-0 left-0 right-0 z-50 h-14 bg-white border-b border-[#E2E8F0] px-6 flex items-center transition-shadow duration-300 ${
+      scrolled ? 'shadow-sm' : ''
+    }`}>
       <a href="#" className="shrink-0">
-        <Logo variant="color" height={48} />
+        <Logo variant="color" height={44} />
       </a>
 
       <div className="hidden md:flex items-center gap-6 ml-8">
-        <a href="#features" className="font-body text-sm text-gray-500 hover:text-primary-dark transition-colors">Explorar</a>
-        <a href="#how" className="font-body text-sm text-gray-500 hover:text-primary-dark transition-colors">Cómo funciona</a>
+        <a href="#features" className="font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Explorar</a>
+        <a href="#how" className="font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Cómo funciona</a>
       </div>
 
-      <div className="ml-auto flex items-center gap-4">
-        <a href="#" className="hidden md:block font-body text-sm text-gray-500 hover:text-primary-dark transition-colors">Mis viajes</a>
-        <a href="#" className="font-body text-sm text-gray-600 hover:text-primary-dark transition-colors">Iniciar sesión</a>
-        <button className="font-body text-sm font-medium bg-green text-white rounded-full px-4 py-1.5 hover:opacity-90 transition-opacity">
+      <div className="ml-auto flex items-center gap-3">
+        <a href="#" className="hidden md:block font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Mis viajes</a>
+        <a href="/login" className="font-body text-sm border border-[#E2E8F0] text-[#3D4A5C] rounded-lg px-4 py-1.5 hover:border-[#1E6FD9] hover:text-[#1E6FD9] transition-colors">
+          Iniciar sesión
+        </a>
+        <a href="/register" className="font-body text-sm font-medium bg-[#1E6FD9] text-white rounded-full px-4 py-1.5 hover:opacity-90 transition-opacity">
           Crear cuenta
-        </button>
+        </a>
       </div>
     </nav>
   )
@@ -33,24 +85,35 @@ function HeroSection() {
   const [dates, setDates] = useState('')
   const [destination, setDestination] = useState('')
   const [people, setPeople] = useState('')
+  const groupCount = useCountUp(1200)
 
   return (
     <section className="relative bg-primary-dark min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-20">
-      {/* Background gradient glow */}
+      {/* Background gradient glow + dot grid */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/30 rounded-full blur-3xl" />
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px)',
+            backgroundSize: '28px 28px',
+          }}
+        />
       </div>
 
       {/* Badge */}
       <div className="relative inline-flex items-center gap-2 border border-white/20 rounded-full px-4 py-1.5 mb-6">
-        <span className="w-2 h-2 rounded-full bg-green animate-pulse" />
+        <span className="relative flex w-2 h-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green opacity-75" />
+          <span className="relative inline-flex rounded-full w-2 h-2 bg-green" />
+        </span>
         <span className="font-body text-xs text-white/80">Colaboración en tiempo real</span>
       </div>
 
       {/* Headline */}
       <h1 className="relative font-heading font-bold text-white text-5xl md:text-6xl leading-tight max-w-2xl mb-4">
         Planifica tu viaje grupal{' '}
-        <span className="text-blue">sin el caos.</span>
+        <span className="bg-gradient-to-r from-[#1E6FD9] to-[#7A4FD6] bg-clip-text text-transparent">sin el caos.</span>
       </h1>
 
       <p className="relative font-body text-white/60 text-base max-w-md mb-8">
@@ -62,7 +125,7 @@ function HeroSection() {
         <button className="font-body font-medium text-sm bg-green text-white rounded-lg px-6 py-3 hover:opacity-90 transition-opacity">
           Crear mi primer viaje
         </button>
-        <button className="font-body font-medium text-sm border border-white/30 text-white rounded-lg px-6 py-3 hover:bg-white/10 transition-colors">
+        <button className="font-body font-medium text-sm border border-[rgba(255,255,255,0.35)] text-white rounded-lg px-6 py-3 hover:bg-white/10 transition-colors">
           Ver cómo funciona
         </button>
       </div>
@@ -129,7 +192,33 @@ function HeroSection() {
             />
           ))}
         </div>
-        <p className="font-body text-white/50 text-xs">1,200+ grupos creados este mes</p>
+        <p className="font-body text-white/50 text-xs">
+          {groupCount.toLocaleString('en-US')}+ grupos creados este mes
+        </p>
+      </div>
+    </section>
+  )
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+
+const stats = [
+  { value: '1,200+', label: 'grupos creados' },
+  { value: '50+',    label: 'destinos disponibles' },
+  { value: '98%',    label: 'satisfacción' },
+  { value: '100%',   label: 'completamente gratis' },
+]
+
+function StatsSection() {
+  return (
+    <section className="bg-white border-b border-[#E2E8F0] py-10 px-4">
+      <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        {stats.map((s) => (
+          <div key={s.label}>
+            <p className="font-heading font-bold text-[#1E0A4E] text-3xl mb-1">{s.value}</p>
+            <p className="font-body text-[#7A8799] text-sm">{s.label}</p>
+          </div>
+        ))}
       </div>
     </section>
   )
@@ -173,8 +262,9 @@ const features = [
 ]
 
 function FeaturesSection() {
+  const ref = useFadeIn()
   return (
-    <section id="features" className="bg-white py-24 px-4">
+    <section id="features" ref={ref} className="bg-white py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <p className="font-body text-xs text-gray-400 uppercase tracking-widest text-center mb-3">
           ¿Qué puedes hacer?
@@ -185,7 +275,7 @@ function FeaturesSection() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {features.map((f) => (
-            <div key={f.title} className="border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div key={f.title} className="border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-[#1E6FD9]/30 transition-all duration-300">
               <div className="w-10 h-10 bg-blue/10 rounded-xl flex items-center justify-center mb-4">
                 {f.icon}
               </div>
@@ -209,8 +299,9 @@ const demoPoints = [
 ]
 
 function DemoSection() {
+  const ref = useFadeIn()
   return (
-    <section className="bg-primary-dark py-24 px-4">
+    <section ref={ref} className="bg-primary-dark py-24 px-4">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
         {/* Left */}
         <div className="flex-1">
@@ -255,8 +346,9 @@ const destinations = [
 ]
 
 function DestinationsSection() {
+  const ref = useFadeIn()
   return (
-    <section className="bg-white py-24 px-4">
+    <section ref={ref} className="bg-white py-24 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-10">
           <h2 className="font-heading font-bold text-primary-dark text-2xl md:text-3xl">
@@ -276,15 +368,89 @@ function DestinationsSection() {
           {destinations.map((dest) => (
             <div
               key={dest.name}
-              className="shrink-0 w-44 h-56 rounded-2xl relative overflow-hidden cursor-pointer group"
+              className="shrink-0 w-44 h-56 rounded-2xl relative overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105"
               style={{ backgroundColor: dest.color }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <p className="font-heading font-semibold text-white text-sm">{dest.name}</p>
-                <p className="font-body text-white/70 text-xs group-hover:text-white transition-colors">
+                <p className="font-body text-xs text-white/60 group-hover:text-white group-hover:font-medium transition-all duration-300">
                   Ver paquetes →
                 </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ── Testimonials ──────────────────────────────────────────────────────────────
+
+const testimonials = [
+  {
+    quote: 'Organizamos el viaje de generación de 12 personas en 3 días. Sin Ithera nos habría tomado semanas de coordinación.',
+    name: 'Ana Martínez',
+    role: 'Estudiante · UNAM',
+    color: '#1E6FD9',
+  },
+  {
+    quote: 'El presupuesto compartido fue un game changer. Todos sabíamos exactamente cuánto llevábamos gastado en tiempo real.',
+    name: 'Carlos Herrera',
+    role: 'Ingeniero · Monterrey',
+    color: '#7A4FD6',
+  },
+  {
+    quote: 'Invité a mis amigos con un link, votamos destinos y en 20 minutos teníamos el itinerario completo listo.',
+    name: 'Sofía Ramírez',
+    role: 'Diseñadora · CDMX',
+    color: '#35C56A',
+  },
+]
+
+function TestimonialsSection() {
+  const ref = useFadeIn()
+  return (
+    <section ref={ref} className="bg-[#F4F6F8] py-24 px-4">
+      <div className="max-w-5xl mx-auto">
+        <p className="font-body text-xs text-[#7A8799] uppercase tracking-widest text-center mb-3">
+          Lo que dicen los viajeros
+        </p>
+        <h2 className="font-heading font-bold text-[#1E0A4E] text-3xl md:text-4xl text-center mb-14">
+          Miles de grupos ya planean con Ithera
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {testimonials.map((t) => (
+            <div
+              key={t.name}
+              className="bg-white rounded-2xl p-6 border border-[#E2E8F0] shadow-sm flex flex-col gap-4 hover:shadow-md transition-shadow duration-300"
+            >
+              {/* Stars */}
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                ))}
+              </div>
+
+              <p className="font-body text-[#3D4A5C] text-sm leading-relaxed flex-1">
+                "{t.quote}"
+              </p>
+
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-white font-heading font-bold text-sm shrink-0"
+                  style={{ backgroundColor: t.color }}
+                >
+                  {t.name[0]}
+                </div>
+                <div>
+                  <p className="font-heading font-semibold text-[#1E0A4E] text-sm">{t.name}</p>
+                  <p className="font-body text-[#7A8799] text-xs">{t.role}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -299,8 +465,9 @@ function DestinationsSection() {
 const steps = [
   {
     number: '1',
+    color: '#1E6FD9',
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-[#1E6FD9]">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2"/>
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
@@ -311,8 +478,9 @@ const steps = [
   },
   {
     number: '2',
+    color: '#7A4FD6',
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-[#7A4FD6]">
         <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
@@ -322,8 +490,9 @@ const steps = [
   },
   {
     number: '3',
+    color: '#35C56A',
     icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-primary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-[#35C56A]">
         <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
         <path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
@@ -334,8 +503,9 @@ const steps = [
 ]
 
 function HowItWorksSection() {
+  const ref = useFadeIn()
   return (
-    <section id="how" className="bg-background py-24 px-4">
+    <section id="how" ref={ref} className="bg-background py-24 px-4">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="font-heading font-bold text-primary-dark text-3xl md:text-4xl mb-16">
           ¿Cómo funciona?
@@ -344,8 +514,14 @@ function HowItWorksSection() {
         <div className="grid md:grid-cols-3 gap-10">
           {steps.map((step) => (
             <div key={step.number} className="flex flex-col items-center">
-              <div className="relative w-16 h-16 rounded-full border-2 border-primary/30 flex items-center justify-center mb-4">
-                <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-primary text-white font-heading font-bold text-xs flex items-center justify-center">
+              <div
+                className="relative w-16 h-16 rounded-full border-2 flex items-center justify-center mb-4"
+                style={{ borderColor: `${step.color}50` }}
+              >
+                <span
+                  className="absolute -top-2 -right-2 w-6 h-6 rounded-full text-white font-heading font-bold text-xs flex items-center justify-center"
+                  style={{ backgroundColor: step.color }}
+                >
                   {step.number}
                 </span>
                 {step.icon}
@@ -363,8 +539,9 @@ function HowItWorksSection() {
 // ── CTA Banner ────────────────────────────────────────────────────────────────
 
 function CTASection() {
+  const ref = useFadeIn()
   return (
-    <section className="bg-primary-dark py-24 px-4 text-center">
+    <section ref={ref} className="bg-primary-dark py-24 px-4 text-center">
       <div className="max-w-2xl mx-auto">
         <h2 className="font-heading font-bold text-white text-4xl md:text-5xl mb-4">
           ¿Listo para tu próxima aventura?
@@ -451,9 +628,11 @@ export function LandingPage() {
     <div className="font-body">
       <LandingNavbar />
       <HeroSection />
+      <StatsSection />
       <FeaturesSection />
       <DemoSection />
       <DestinationsSection />
+      <TestimonialsSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />
