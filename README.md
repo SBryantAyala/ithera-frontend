@@ -1,6 +1,6 @@
 # Ithera Frontend
 
-Aplicación web de planificación de viajes colaborativos en tiempo real.
+Aplicación web de planificación de viajes colaborativos · ESCOM IPN
 
 Desarrollada por el Equipo 3 — Análisis y Diseño de Sistemas · ESCOM IPN
 
@@ -92,10 +92,8 @@ src/
 
 | Token | Valor |
 |---|---|
-| Primary Dark | `#1E0A4E` |
-| Primary | `#4B2FA3` |
-| Blue | `#1E6FD9` |
-| Purple | `#7A4FD6` |
+| Navbar / Purple Deep | `#1E0A4E` |
+| Primary Blue | `#1E6FD9` |
 | Green | `#35C56A` |
 | Background | `#F4F6F8` |
 | Error | `#EF4444` |
