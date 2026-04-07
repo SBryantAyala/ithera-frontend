@@ -45,7 +45,7 @@ export function Table<T>({
               <th
                 key={String(col.key)}
                 className={[
-                  'px-4 py-3 text-left font-heading text-xs font-semibold text-primary uppercase tracking-wide',
+                  'px-4 py-3 text-left font-heading text-xs font-semibold text-primary-dark uppercase tracking-wide',
                   'border-b border-gray-200',
                   col.className ?? '',
                 ].join(' ')}

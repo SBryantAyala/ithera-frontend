@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Size } from '../../types'
+import type { Size } from '../../../types'
 
 export interface AvatarProps {
   src?: string
@@ -33,7 +33,7 @@ export function Avatar({ src, alt, name, size = 'md', className = '' }: AvatarPr
     <div
       className={[
         'rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden',
-        'bg-accent text-white font-body font-medium select-none',
+        'bg-blue text-white font-body font-medium select-none',
         sizeClasses[size],
         className,
       ].join(' ')}

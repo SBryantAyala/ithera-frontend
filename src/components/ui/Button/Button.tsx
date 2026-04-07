@@ -1,5 +1,5 @@
 import React from 'react'
-import type { ButtonVariant, Size } from '../../types'
+import type { ButtonVariant, Size } from '../../../types'
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant
@@ -12,10 +12,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:   'bg-primary text-white hover:bg-secondary focus-visible:ring-secondary',
-  secondary: 'bg-secondary text-white hover:bg-purple focus-visible:ring-purple',
-  outline:   'border border-primary text-primary bg-transparent hover:bg-primary hover:text-white focus-visible:ring-primary',
-  ghost:     'text-primary bg-transparent hover:bg-primary/10 focus-visible:ring-primary',
+  primary:   'bg-primary-dark text-white hover:bg-primary focus-visible:ring-primary',
+  secondary: 'bg-primary text-white hover:bg-purple focus-visible:ring-purple',
+  outline:   'border border-primary-dark text-primary-dark bg-transparent hover:bg-primary-dark hover:text-white focus-visible:ring-primary-dark',
+  ghost:     'text-primary-dark bg-transparent hover:bg-primary-dark/10 focus-visible:ring-primary-dark',
 }
 
 const sizeClasses: Record<Size, string> = {

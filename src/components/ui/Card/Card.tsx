@@ -48,7 +48,7 @@ export function Card({
     >
       {header && (
         <div className="px-5 py-4 border-b border-gray-100">
-          <div className="font-heading text-base font-semibold text-primary">{header}</div>
+          <div className="font-heading text-base font-semibold text-primary-dark">{header}</div>
         </div>
       )}
       <div className={paddingClasses[padding]}>{children}</div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { BadgeVariant } from '../../types'
+import type { BadgeVariant } from '../../../types'
 
 export interface BadgeProps {
   variant?: BadgeVariant
@@ -13,14 +13,14 @@ const variantClasses: Record<BadgeVariant, string> = {
   success: 'bg-green/15 text-green border border-green/30',
   warning: 'bg-yellow-100 text-yellow-700 border border-yellow-200',
   error:   'bg-error/15 text-error border border-error/30',
-  info:    'bg-accent/15 text-accent border border-accent/30',
+  info:    'bg-blue/15 text-blue border border-blue/30',
 }
 
 const dotClasses: Record<BadgeVariant, string> = {
   success: 'bg-green',
   warning: 'bg-yellow-500',
   error:   'bg-error',
-  info:    'bg-accent',
+  info:    'bg-blue',
 }
 
 const sizeClasses: Record<'sm' | 'md', string> = {

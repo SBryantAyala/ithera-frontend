@@ -7,18 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#1E0A4E',
-        secondary: '#4B2FA3',
-        accent: '#1E6FD9',
-        purple: '#7A4FD6',
-        green: '#35C56A',
+        primary: {
+          DEFAULT: '#4B2FA3',
+          dark:    '#1E0A4E',
+        },
+        blue:       '#1E6FD9',
+        purple:     '#7A4FD6',
+        green:      '#35C56A',
         background: '#F4F6F8',
-        error: '#EF4444',
+        error:      '#EF4444',
       },
       fontFamily: {
         heading: ['"Plus Jakarta Sans"', 'sans-serif'],
-        body: ['"DM Sans"', 'sans-serif'],
-        sans: ['"DM Sans"', 'sans-serif'],
+        body:    ['"DM Sans"', 'sans-serif'],
+        sans:    ['"DM Sans"', 'sans-serif'],
       },
     },
   },
