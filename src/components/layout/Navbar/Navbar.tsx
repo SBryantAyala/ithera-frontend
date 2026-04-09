@@ -1,63 +1,38 @@
-import type { User, NavItem } from '../../../types'
-import { Avatar } from '../../ui/Avatar'
+import { useState, useEffect } from 'react'
 import { Logo } from '../../ui/Logo'
 
-export interface NavbarProps {
-  user?: User
-  navLinks?: NavItem[]
-  onLogout?: () => void
-  onAvatarClick?: () => void
-}
+export const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false)
 
-export function Navbar({
-  user,
-  navLinks = [],
-  onLogout,
-  onAvatarClick,
-}: NavbarProps) {
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-primary-dark flex items-center px-6 shadow-md">
-      {/* Logo */}
-      <Logo variant="white" height={40} />
+    <nav className={`fixed top-0 left-0 right-0 z-50 h-14 bg-white border-b border-[#E2E8F0] px-6 flex items-center transition-shadow duration-300 ${
+      scrolled ? 'shadow-sm' : ''
+    }`}>
+      <a href="#" className="shrink-0">
+        <Logo variant="color" height={44} />
+      </a>
 
-      {/* Nav links */}
-      {navLinks.length > 0 && (
-        <ul className="hidden md:flex items-center gap-6 ml-8 list-none m-0 p-0">
-          {navLinks.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="font-body text-sm text-white/80 hover:text-white transition-colors duration-150"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="hidden md:flex items-center gap-6 ml-8">
+        <a href="#features" className="font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Explorar</a>
+        <a href="#how" className="font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Cómo funciona</a>
+      </div>
 
-      {/* User section */}
       <div className="ml-auto flex items-center gap-3">
-        {user && (
-          <>
-            <span className="font-body text-sm text-white hidden lg:block">{user.name}</span>
-            <button
-              onClick={onAvatarClick}
-              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
-              aria-label="Perfil de usuario"
-            >
-              <Avatar src={user.avatarUrl} name={user.name} size="sm" />
-            </button>
-          </>
-        )}
-        {onLogout && (
-          <button
-            onClick={onLogout}
-            className="font-body text-xs text-white/70 hover:text-white transition-colors duration-150 ml-1"
-          >
-            Salir
-          </button>
-        )}
+        <a href="#" className="hidden md:block font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Mis viajes</a>
+        <a href="/login" className="font-body text-sm border border-[#E2E8F0] text-[#3D4A5C] rounded-lg px-4 py-1.5 hover:border-[#1E6FD9] hover:text-[#1E6FD9] transition-colors">
+          Iniciar sesión
+        </a>
+        <a href="/register" className="font-body text-sm font-medium bg-[#1E6FD9] text-white rounded-full px-4 py-1.5 hover:opacity-90 transition-opacity">
+          Crear cuenta
+        </a>
+        
+      
       </div>
     </nav>
   )

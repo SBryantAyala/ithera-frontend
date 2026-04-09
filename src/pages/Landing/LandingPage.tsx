@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Logo } from '../../components/ui/Logo'
+import { Navbar } from '../../components/layout/Navbar/Navbar'
 
 // ── Hooks ─────────────────────────────────────────────────────────────────────
 
@@ -43,6 +44,10 @@ function useFadeIn() {
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
+/*
+
+Esto se quitara despues, ya se añadio a /components/layout/Navbar/Navbar.tsx, esto es solo para mostrarlo en la landing page sin tener que usar el layout completo
+
 function LandingNavbar() {
   const [scrolled, setScrolled] = useState(false)
 
@@ -77,6 +82,7 @@ function LandingNavbar() {
     </nav>
   )
 }
+*/
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 
@@ -662,7 +668,7 @@ function Footer() {
 export function LandingPage() {
   return (
     <div className="font-body">
-      <LandingNavbar />
+      <Navbar />
       <HeroSection />
       <StatsSection />
       <FeaturesSection />
