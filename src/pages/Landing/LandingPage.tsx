@@ -360,7 +360,7 @@ const destinations = [
   },
   {
     name: 'Puerto Vallarta',
-    image: 'https://images.unsplash.com/photo-1568700571716-801652e68748?w=400&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1510097467424-192d713fd8b2?w=400&h=600&fit=crop',
     fallback: '#6E4B8A',
   },
 ]
