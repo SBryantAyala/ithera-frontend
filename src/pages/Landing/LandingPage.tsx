@@ -89,6 +89,16 @@ function HeroSection() {
 
   return (
     <section className="relative bg-primary-dark min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-20">
+      {/* Beach background image */}
+      <img
+        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&h=900&fit=crop"
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Strong purple overlay — image barely perceptible */}
+      <div className="absolute inset-0 bg-[#1E0A4E]/85" />
+
       {/* Background gradient glow + dot grid */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/30 rounded-full blur-3xl" />
