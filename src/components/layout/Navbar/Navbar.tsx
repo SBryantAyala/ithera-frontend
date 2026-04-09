@@ -1,64 +1,39 @@
-import type { User, NavItem } from '../../../types'
-import { Avatar } from '../../ui/Avatar'
-import { Logo } from '../../ui/Logo'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export interface NavbarProps {
-  user?: User
-  navLinks?: NavItem[]
-  onLogout?: () => void
-  onAvatarClick?: () => void
-}
-
-export function Navbar({
-  user,
-  navLinks = [],
-  onLogout,
-  onAvatarClick,
-}: NavbarProps) {
+export const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-16 bg-primary-dark flex items-center px-6 shadow-md">
-      {/* Logo */}
-      <Logo variant="white" height={40} />
+    <nav className="absolute top-0 w-full z-50 px-6 py-4 bg-transparent text-white">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        
+        {/* Logo Ithera */}
+        <Link to="/" className="flex items-center gap-2">
+          {/* Reemplaza con el logo final */}
+          <span className="text-[#1E6FD9] text-2xl">✈️</span>
+          <span className="font-bold text-xl tracking-wide">ITHERA</span>
+        </Link>
 
-      {/* Nav links */}
-      {navLinks.length > 0 && (
-        <ul className="hidden md:flex items-center gap-6 ml-8 list-none m-0 p-0">
-          {navLinks.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="font-body text-sm text-white/80 hover:text-white transition-colors duration-150"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
+        {/* Links de navegación (Desktop) */}
+        <div className="hidden md:flex space-x-8 text-sm font-medium">
+          <Link to="#destinos" className="hover:text-[#1E6FD9] transition-colors">Destinos</Link>
+          <Link to="#como-funciona" className="hover:text-[#1E6FD9] transition-colors">Cómo funciona</Link>
+          <Link to="#precios" className="hover:text-[#1E6FD9] transition-colors">Precios</Link>
+        </div>
 
-      {/* User section */}
-      <div className="ml-auto flex items-center gap-3">
-        {user && (
-          <>
-            <span className="font-body text-sm text-white hidden lg:block">{user.name}</span>
-            <button
-              onClick={onAvatarClick}
-              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
-              aria-label="Perfil de usuario"
-            >
-              <Avatar src={user.avatarUrl} name={user.name} size="sm" />
-            </button>
-          </>
-        )}
-        {onLogout && (
-          <button
-            onClick={onLogout}
-            className="font-body text-xs text-white/70 hover:text-white transition-colors duration-150 ml-1"
+        {/* Botones de Auth */}
+        <div className="flex items-center gap-4">
+          <Link to="/login" className="text-sm font-medium hover:text-[#1E6FD9] transition-colors">
+            Iniciar sesión
+          </Link>
+          <Link 
+            to="/register" 
+            className="px-5 py-2 bg-[#1E6FD9] hover:bg-blue-700 text-white text-sm font-medium rounded-full transition-colors"
           >
-            Salir
-          </button>
-        )}
+            Crear cuenta
+          </Link>
+        </div>
+        
       </div>
     </nav>
-  )
-}
+  );
+};
