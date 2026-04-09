@@ -338,11 +338,31 @@ function DemoSection() {
 // ── Destinations ──────────────────────────────────────────────────────────────
 
 const destinations = [
-  { name: 'Cancún',           color: '#4B8A6E' },
-  { name: 'Ciudad de México', color: '#8A6E4B' },
-  { name: 'Oaxaca',           color: '#8A4B6E' },
-  { name: 'Los Cabos',        color: '#4B6E8A' },
-  { name: 'Puerto Vallarta',  color: '#6E4B8A' },
+  {
+    name: 'Cancún',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=600&fit=crop',
+    fallback: '#4B8A6E',
+  },
+  {
+    name: 'Ciudad de México',
+    image: 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=400&h=600&fit=crop',
+    fallback: '#8A6E4B',
+  },
+  {
+    name: 'Oaxaca',
+    image: 'https://images.unsplash.com/photo-1518638150340-f706e86654de?w=400&h=600&fit=crop',
+    fallback: '#8A4B6E',
+  },
+  {
+    name: 'Los Cabos',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=600&fit=crop',
+    fallback: '#4B6E8A',
+  },
+  {
+    name: 'Puerto Vallarta',
+    image: 'https://images.unsplash.com/photo-1568700571716-801652e68748?w=400&h=600&fit=crop',
+    fallback: '#6E4B8A',
+  },
 ]
 
 function DestinationsSection() {
@@ -369,8 +389,14 @@ function DestinationsSection() {
             <div
               key={dest.name}
               className="shrink-0 w-44 h-56 rounded-2xl relative overflow-hidden cursor-pointer group transition-transform duration-300 hover:scale-105"
-              style={{ backgroundColor: dest.color }}
+              style={{ backgroundColor: dest.fallback }}
             >
+              <img
+                src={dest.image}
+                alt={dest.name}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <p className="font-heading font-semibold text-white text-sm">{dest.name}</p>
