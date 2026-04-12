@@ -1,59 +1,65 @@
 import { Link } from 'react-router-dom';
+import { Logo } from '../../ui/Logo';
+
+const footerLinks = {
+  Producto:  ['Explorar', 'Cómo funciona', 'Precios', 'Testimonios'],
+  Compañía:  ['Acerca de', 'Blog', 'Carreras', 'Contacto'],
+  Legal:     ['Privacidad', 'Términos', 'Cookies', 'Soporte'],
+};
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#1E0A4E] text-gray-300 py-12 px-6 border-t border-white/10">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        
-        {/* Columna 1 */}
-        <div className="col-span-1">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-[#1E6FD9] text-2xl">✈️</span>
-            <span className="font-bold text-xl text-white tracking-wide">ITHERA</span>
+    <footer className="bg-primary-dark border-t border-white/10 py-14 px-4">
+      <div className="max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-10">
+          
+          {/* Brand */}
+          <div>
+            <div className="mb-3">
+              <Logo variant="white" height={40} />
+            </div>
+            <p className="font-body text-white/40 text-xs leading-relaxed mb-4">
+              Planifica viajes grupales sin complicaciones.
+            </p>
+            <div className="flex gap-3">
+              {['ig', 'tw', 'in', 'yt'].map((social) => (
+                <a
+                  key={social}
+                  href={`https://${social}.com`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  aria-label={social}
+                >
+                  <span className="font-body text-white/60 text-[9px] uppercase">{social}</span>
+                </a>
+              ))}
+            </div>
           </div>
-          <p className="text-sm text-gray-400 mb-6 pr-4">
-            Planifica tu viaje grupal sin el caos. La mejor forma de organizar tu próxima aventura.
+
+          {/* Link columns */}
+          {Object.entries(footerLinks).map(([col, links]) => (
+            <div key={col}>
+              <p className="font-heading font-semibold text-white text-xs uppercase tracking-wider mb-4">{col}</p>
+              <ul className="space-y-2">
+                {links.map((link) => (
+                  <li key={link}>
+                    {/* Convertimos el texto a minúsculas y sin espacios para simular rutas reales */}
+                    <Link to={`/${link.toLowerCase().replace(/\s+/g, '-')}`} className="font-body text-white/40 text-xs hover:text-white/70 transition-colors">
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="border-t border-white/10 pt-6">
+          <p className="font-body text-white/25 text-xs text-center">
+            © {new Date().getFullYear()} Ithera. Todos los derechos reservados.
           </p>
-          <div className="flex space-x-3">
-             <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 cursor-pointer flex items-center justify-center transition-colors">𝕏</div>
-             <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 cursor-pointer flex items-center justify-center transition-colors">In</div>
-             <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 cursor-pointer flex items-center justify-center transition-colors">Ig</div>
-          </div>
         </div>
-        
-        {/* Columna 2 */}
-        <div>
-          <h4 className="text-white font-semibold mb-4">Producto</h4>
-          <ul className="space-y-3 text-sm">
-            <li><Link to="/destinos" className="hover:text-white transition-colors">Destinos</Link></li>
-            <li><Link to="/como-funciona" className="hover:text-white transition-colors">Cómo funciona</Link></li>
-            <li><Link to="/precios" className="hover:text-white transition-colors">Precios</Link></li>
-          </ul>
-        </div>
-
-        {/* Columna 3 */}
-        <div>
-          <h4 className="text-white font-semibold mb-4">Compañía</h4>
-          <ul className="space-y-3 text-sm">
-            <li><Link to="/nosotros" className="hover:text-white transition-colors">Sobre nosotros</Link></li>
-            <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-            <li><Link to="/contacto" className="hover:text-white transition-colors">Contacto</Link></li>
-          </ul>
-        </div>
-
-        {/* Columna 4 */}
-        <div>
-          <h4 className="text-white font-semibold mb-4">Legal</h4>
-          <ul className="space-y-3 text-sm">
-            <li><Link to="/privacidad" className="hover:text-white transition-colors">Privacidad</Link></li>
-            <li><Link to="/terminos" className="hover:text-white transition-colors">Términos y Condiciones</Link></li>
-            <li><Link to="/cookies" className="hover:text-white transition-colors">Cookies</Link></li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/10 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} Ithera. Todos los derechos reservados.
       </div>
     </footer>
   );
