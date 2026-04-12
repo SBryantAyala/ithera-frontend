@@ -1,39 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react'
+import { Logo } from '../../ui/Logo'
 
 export const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <nav className="absolute top-0 w-full z-50 px-6 py-4 bg-transparent text-white">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        
-        {/* Logo Ithera */}
-        <Link to="/" className="flex items-center gap-2">
-          {/* Reemplaza con el logo final */}
-          <span className="text-[#1E6FD9] text-2xl">✈️</span>
-          <span className="font-bold text-xl tracking-wide">ITHERA</span>
-        </Link>
+    <nav className={`fixed top-0 left-0 right-0 z-50 h-14 bg-white border-b border-[#E2E8F0] px-6 flex items-center transition-shadow duration-300 ${
+      scrolled ? 'shadow-sm' : ''
+    }`}>
+      <a href="#" className="shrink-0">
+        <Logo variant="color" height={44} />
+      </a>
 
-        {/* Links de navegación (Desktop) */}
-        <div className="hidden md:flex space-x-8 text-sm font-medium">
-          <Link to="#destinos" className="hover:text-[#1E6FD9] transition-colors">Destinos</Link>
-          <Link to="#como-funciona" className="hover:text-[#1E6FD9] transition-colors">Cómo funciona</Link>
-          <Link to="#precios" className="hover:text-[#1E6FD9] transition-colors">Precios</Link>
-        </div>
+      <div className="hidden md:flex items-center gap-6 ml-8">
+        <a href="#features" className="font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Explorar</a>
+        <a href="#how" className="font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Cómo funciona</a>
+      </div>
 
-        {/* Botones de Auth */}
-        <div className="flex items-center gap-4">
-          <Link to="/login" className="text-sm font-medium hover:text-[#1E6FD9] transition-colors">
-            Iniciar sesión
-          </Link>
-          <Link 
-            to="/register" 
-            className="px-5 py-2 bg-[#1E6FD9] hover:bg-blue-700 text-white text-sm font-medium rounded-full transition-colors"
-          >
-            Crear cuenta
-          </Link>
-        </div>
+      <div className="ml-auto flex items-center gap-3">
+        <a href="#" className="hidden md:block font-body text-sm text-[#7A8799] hover:text-[#1E0A4E] transition-colors">Mis viajes</a>
+        <a href="/login" className="font-body text-sm border border-[#E2E8F0] text-[#3D4A5C] rounded-lg px-4 py-1.5 hover:border-[#1E6FD9] hover:text-[#1E6FD9] transition-colors">
+          Iniciar sesión
+        </a>
+        <a href="/register" className="font-body text-sm font-medium bg-[#1E6FD9] text-white rounded-full px-4 py-1.5 hover:opacity-90 transition-opacity">
+          Crear cuenta
+        </a>
         
+      
       </div>
     </nav>
-  );
-};
+  )
+}

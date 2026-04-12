@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import { Navbar } from './navbar/Navbar'; 
-import { Footer } from './footer/Footer'; 
+import type { ReactNode } from 'react';
+import { Navbar } from './Navbar/Navbar'; 
+import { Footer } from './Footer/Footer'; 
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,7 +8,6 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    {/* Usando el Background oficial #F4F6F8 del proyecto para el contenedor principal */}
     <div className="flex flex-col min-h-screen bg-[#F4F6F8] font-sans">
       <Navbar />
       

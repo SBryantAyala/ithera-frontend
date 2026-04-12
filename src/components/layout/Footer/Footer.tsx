@@ -1,9 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const Footer = () => {
   return (
-    {/* Usando el Purple Deep (#1E0A4E) oficial de tu README */}
     <footer className="bg-[#1E0A4E] text-gray-300 py-12 px-6 border-t border-white/10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         
